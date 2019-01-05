@@ -33,4 +33,45 @@
             <!--</plugin>-->
         <!--</plugins>-->
     <!--</build>-->
+
+
+
+
+    <build>
+        <finalName>linyuange</finalName>
+
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <!--<serverId>webserver</serverId>-->
+                    <!-- 需要部署的文件当前pom.xml的相对路径 -->
+                    <fromFile>target/linyuange.jar</fromFile>
+                    <!-- 部署目录(账号：slt,密码：zaq12wsx) -->
+                    <url>scp://slt:zaq12wsx@47.98.126.74/home/slt/linyuange/</url>
+                    <commands>
+                        <command>
+                            java -jar /home/slt/linyuange/linyuange.jar
+                        </command>
+                    </commands>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!--wagon执行命令的扩展-->
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.8</version>
+            </extension>
+        </extensions>
+    </build>
 </project>
